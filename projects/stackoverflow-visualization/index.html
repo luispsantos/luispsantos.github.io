@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Stack Overflow Communities</title>
+
+    <!-- D3 -->
+    <script	src="libs/d3.v4.min.js" charset="utf-8"></script>
+
+    <!-- Material Design Lite -->
+    <link href="css/opensans.css" rel="stylesheet">
+    <link href="css/material-icons.css" rel="stylesheet">
+    <link href="libs/mdl/material.orange-amber.min.css" rel="stylesheet">
+    <script src="libs/mdl/material.min.js"></script>
+
+    <!-- Source -->
+    <link href= "css/d3bubble.css" rel="stylesheet">
+    <link href= "css/d3donut.css" rel="stylesheet">
+    <link href= "css/d3heatmap.css" rel="stylesheet">
+    <link href= "css/d3scatter.css" rel="stylesheet">
+    <link href= "css/d3time.css" rel="stylesheet">
+    <link href= "css/d3votes.css" rel="stylesheet">
+    <link href= "css/d3zoom.css" rel="stylesheet">
+    <script	src="src/constants.js" charset="utf-8"></script>
+    <script	src="src/d3bubble.js" charset="utf-8"></script>
+    <script	src="src/d3donut.js" charset="utf-8"></script>
+    <script	src="src/d3graph.js" charset="utf-8"></script>
+    <script	src="src/d3heatmap.js" charset="utf-8"></script>
+    <script	src="src/d3region.js" charset="utf-8"></script>
+    <script	src="src/d3scatter.js" charset="utf-8"></script>
+    <script	src="src/d3sidebar.js" charset="utf-8"></script>
+    <script	src="src/d3time.js" charset="utf-8"></script>
+    <script	src="src/d3votes.js" charset="utf-8"></script>
+    <script	src="src/d3zoom.js" charset="utf-8"></script>
+    <script	src="src/data.js" charset="utf-8"></script>
+    <script	src="src/util.js" charset="utf-8"></script>
+    <link href= "index.css" rel="stylesheet">
+    <script	src="index.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="mdl-layout mdl-js-layout" style="background: #eeeeee">
+    <header class="mdl-layout__header" style="background: white;">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <img id="logo" src="img/logo.png" />
+            <!-- Time navigator -->
+            <svg id="time">
+                <path class="area" d=""></path>
+                <g class="axis"></g>
+                <g class="focus"></g>
+            </svg>
+            <!-- Right aligned menu below button -->
+            <div id="region" class="mdl-button mdl-js-button">
+                <img src="img/flags/international.png" height="16" style="margin: 0 4px;" />
+                <span>es.stackoverflow.com</span>
+                <i class="material-icons">arrow_drop_down</i>
+            </div>
+            <ul id="region-dropdown" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="region">
+                <li class="mdl-menu__item"><img src="img/flags/international.png" height="16" />stackoverflow.com</li>
+                <li class="mdl-menu__item"><img src="img/flags/spain.png" height="16" />es.stackoverflow.com</li>
+                <li class="mdl-menu__item"><img src="img/flags/japan.png" height="16" />ja.stackoverflow.com</li>
+                <li class="mdl-menu__item selected"><img src="img/flags/brazil.png" height="16" />pt.stackoverflow.com</li>
+                <li class="mdl-menu__item"><img src="img/flags/russia.png" height="16" />ru.stackoverflow.com</li>
+            </ul>
+        </div>
+    </header>
+    <main class="mdl-layout__content" style="overflow: hidden;">
+        <!-- Sidebar -->
+        <div id="sidebar" class="mdl-card mdl-shadow--2dp">
+            <!-- Top -->
+            <div class="icon"></div>
+            <div class="tag">&nbsp;</div>
+            <!-- Community/Region Activity -->
+            <div class="title-activity title">Region Activity</div>
+            <svg id="heatmap">
+                <g class="axis-month"></g>
+                <g class="axis-week"></g>
+                <g class="chart"></g>
+                <rect class="area" height="0" width="100%" fill="red" opacity="0"></rect>
+                <foreignObject class="tooltip" height="100">
+                    <table class="day">
+                        <thead>
+                            <tr>
+                                <td colspan="2">21st December</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Answers</td>
+                                <td class="answers">562</td>
+                            </tr>
+                            <tr>
+                                <td>Comments</td>
+                                <td class="comments">855</td>
+                            </tr>
+                            <tr>
+                                <td>Questions</td>
+                                <td class="questions">64</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="week">
+                        <thead>
+                            <tr>
+                                <td colspan="2">Week 39</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Answers</td>
+                                <td class="answers">5624</td>
+                            </tr>
+                            <tr>
+                                <td>Comments</td>
+                                <td class="comments">8556</td>
+                            </tr>
+                            <tr>
+                                <td>Questions</td>
+                                <td class="questions">648</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </foreignObject>
+            </svg>
+            <!-- Community/Region Health -->
+            <div class="title-health title">Region Health</div>
+            <svg id="votes">
+                <line x1="0" x2="100%" y1="50%" y2="50%"></line>
+                <g class="downvotes"></g>
+                <g class="upvotes"></g>
+                <rect class="area" height="100%" width="100%" fill="red" opacity="0"></rect>
+                <foreignObject class="tooltip" height="80">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td colspan="2">Week 39</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Upvotes</td>
+                                <td class="upvotes">562</td>
+                            </tr>
+                            <tr>
+                                <td>Downvotes</td>
+                                <td class="downvotes">855</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </foreignObject>
+            </svg>
+            <!-- Region Overview -->
+            <div id="overview">
+                <div class="title">Region Overview</div>
+                <svg id="scatter">
+                    <defs>
+                        <radialGradient id="gradient" cx="50%" cy="50%" fx="50%" fy="50%" r="50%">
+                            <stop offset="0%" stop-color="white"></stop>
+                            <stop offset="100%" stop-color="#F48024"></stop>
+                        </radialGradient>
+                    </defs>
+                    <g class="chart"></g>
+                    <foreignObject class="tooltip" height="80">
+                        <table>
+                            <thead>
+                            <tr>
+                                <td colspan="2">Javascript</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="y-label">Upvotes</td>
+                                <td class="y-value">562</td>
+                            </tr>
+                            <tr>
+                                <td class="x-label">Downvotes</td>
+                                <td class="x-value">855</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </foreignObject>
+                    <foreignObject height="40" width="100%">
+                        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                            <div class="mdl-tabs__tab-bar">
+                                <a href="#overview-0" class="mdl-tabs__tab is-active">Questions/Answers</a>
+                                <a href="#overview-1" class="mdl-tabs__tab">Answers/Comments</a>
+                                <a href="#overview-2" class="mdl-tabs__tab">Upvotes/Downvotes</a>
+                            </div>
+                            <div id="overview-0"></div>
+                            <div id="overview-1"></div>
+                            <div id="overview-2"></div>
+                        </div>
+                    </foreignObject>
+                </svg>
+            </div>
+            <!-- Related/Sub Communities -->
+            <div id="communities">
+                <div>
+                    <div class="title">Related Communities</div>
+                    <svg id="donut-related"></svg>
+                </div>
+                <div>
+                    <div class="title">Sub Communities</div>
+                    <svg id="donut-sub"></svg>
+                </div>
+            </div>
+        </div>
+        <svg id="zoom">
+            <defs></defs>
+            <filter id="dropshadow">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="0"></feGaussianBlur> <!-- stdDeviation is how much to blur -->
+                <feOffset dx="0.5" dy="1" result="offsetblur"></feOffset> <!-- how much to offset -->
+                <feComponentTransfer>
+                    <feFuncA type="linear" slope="0.3"></feFuncA> <!-- slope is the opacity of the shadow -->
+                </feComponentTransfer>
+                <feMerge>
+                    <feMergeNode></feMergeNode> <!-- this contains the offset blurred image -->
+                    <feMergeNode in="SourceGraphic"></feMergeNode> <!-- this contains the element that the filter is applied to -->
+                </feMerge>
+            </filter>
+            <g id="zoomable">
+                <g id="graph"></g>
+                <g id="bubble"></g>
+            </g>
+        </svg>
+    </main>
+</div>
+</body>
+</html>

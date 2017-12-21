@@ -1,0 +1,33 @@
+#heatmap {
+    height: 10rem;
+}
+
+#heatmap line,
+#heatmap path {
+    display: none;
+}
+
+#heatmap text {
+    fill: #95989A;
+}
+
+#heatmap .axis-month {
+    font-size: 0.95rem;
+}
+#heatmap .axis-week {
+    font-size: 0.6rem;
+}
+
+/* Tooltip */
+#heatmap .tooltip tbody tr td:nth-of-type(1) { width: 40%; }
+#heatmap .tooltip tbody tr td:nth-of-type(2) { width: 60%; }
+
+#heatmap .tooltip > .day,
+#heatmap .tooltip > .week {
+    width: calc(50% - 0.5px);
+}
+
+#heatmap .tooltip > .day  { float: right; }
+#heatmap .tooltip > .week { float: left; }
+#heatmap .tooltip.is-inverted > .day   { float: left !important; }
+#heatmap .tooltip.is-inverted > .week  { float: right !important; }

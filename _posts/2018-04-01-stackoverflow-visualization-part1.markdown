@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  "Visualizing programmer behaviour on StackOverflow - part 1"
-date:   2017-04-01 16:00:00 +0100
-categories: jekyll update
+date:   2018-04-01 16:00:00 +0100
 ---
 
 StackOverflow is widely known among programmers as a Q&A website where programmers can ask questions about nearly any topic related to programming.
